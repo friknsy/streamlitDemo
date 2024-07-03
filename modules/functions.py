@@ -28,12 +28,14 @@ _fabric_database = st.secrets["FABRIC_DATABASE"]
 _odbc_driver = st.secrets["ODBC_DRIVER"]
 
 #connection_string = f"mssql+pyodbc://@{fabric_endpoint}/DWforAiStudio?driver=ODBC+Driver+17+for+SQL+Server"
+#login time out error 발생. streamlit cloud linux 서버에서 
+#port 번호 fabric.microsoft.com:1433 (X) fabric.microsoft.com,1433 방식으로 넘김.
 connection_url = URL.create(
     "mssql+pyodbc",
     username = _username,
     password = _password,
     host = _fabric_endpoint,
-    port = 1433,
+    #port = 1433,
     database = _fabric_database,
     query={
         "driver":_odbc_driver ,
@@ -41,6 +43,7 @@ connection_url = URL.create(
         "authentication": "ActiveDirectoryPassword",
     },
 )
+print(connection_url)
 engine = create_engine(connection_url)
 
 _include_tables = [
