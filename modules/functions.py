@@ -25,6 +25,7 @@ _username =        st.secrets["FABRIC_USERNAME"]
 _password =        st.secrets["FABRIC_PASSWORD"]
 _fabric_endpoint = st.secrets["FABRIC_ENDPOINT"]
 _fabric_database = st.secrets["FABRIC_DATABASE"]
+_odbc_driver = st.secrets["ODBC_DRIVER"]
 
 #connection_string = f"mssql+pyodbc://@{fabric_endpoint}/DWforAiStudio?driver=ODBC+Driver+17+for+SQL+Server"
 connection_url = URL.create(
@@ -35,7 +36,7 @@ connection_url = URL.create(
     port = 1433,
     database = _fabric_database,
     query={
-        "driver": "ODBC Driver 18 for SQL Server",
+        "driver":_odbc_driver ,
         "TrustServerCertificate": "yes",
         "authentication": "ActiveDirectoryPassword",
     },
