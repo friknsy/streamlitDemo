@@ -44,8 +44,17 @@ connection_url = URL.create(
         "authentication": "ActiveDirectoryPassword",
     },
 )
-print(connection_url)
-engine = create_engine(connection_url)
+
+
+connection_string = f"DRIVER={_odbc_driver};SERVER={_fabric_endpoint};DATABASE={_fabric_database};UID={_username};PWD={_password}"
+connection_url2 = URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
+
+
+
+#print(connection_url)
+print(connection_url2)
+engine = create_engine(connection_url2)
+
 
 _include_tables = [
                     'DIM_CUSTOMER'
